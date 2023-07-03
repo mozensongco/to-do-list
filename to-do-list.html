@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+
+</head>
+<body>
+    
+    <h1>TO-DO LIST:</h1>
+    <ul>
+        <li>Message Evelyn and Kay</li>
+        <li>Print out final for Luna and Wayne</li>
+        <li>Charisma Check team meeting</li>
+        <li>Clean the bathroom</li>
+    </ul>
+
+    <form>
+        What else do you have to do?
+            <br>
+            <input type="text" name="to-do-item" id="to-do-item" placeholder="Oh, so many things...">
+            <br>
+            <input type="submit" id="submit" value="Add it to the list!">
+    </form>
+
+    <script>
+
+        function newItem () {
+            let task = document.createElement("li");
+            task.innerText = document.querySelector("#to-do-item").value;
+            document.querySelector("ul").appendChild(task);
+            document.querySelector("#to-do-item").value = "";
+        }
+
+        // This should cover both using the button and the Enter key
+        // to submit the form. This does allow for empty items on the to-do list.
+
+        document.querySelector("form").addEventListener("submit", (e) => {
+            // Got this from the javascript-functions-1-assignment code!
+            e.preventDefault();
+            newItem();
+        } );
+
+
+        // I think remove() doesn't work for new list items because the forEach loop executes on page reload,
+        // so new tasks don't have the event listener applied to them?
+        // I'm not sure how to fix this at the moment. Questions to ask for next class, then.
+        
+        document.querySelectorAll("li").forEach((task) => {
+            task.addEventListener("click", (clickEvent) => {
+                clickEvent.target.style.cssText = "text-decoration: line-through";
+                setTimeout( () => {
+                    clickEvent.target.remove();
+                }, 1000);
+            } );
+        } );
+
+
+    </script>
+
+</body>
+</html>
